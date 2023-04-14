@@ -71,20 +71,19 @@ Class UserController extends Controller {
 
     public function update(Request $request, $id) { //UPDATE USER
         $rules = [
-            'username' => 'required|max:20',
-            'password' => 'required|max:20',
-            'gender' => 'required|in:Male,Female',
+            'username' => 'max:20',
+            'password' => 'max:20',
+            'gender' => 'in:Male,Female',
         ];
     
         $this->validate($request, $rules);
     
-        $user = User::findOrFail($id);
+        $User =  User::findOrFail($id);
     
         $user->fill($request->all());
     
         if ($user->isClean()) {
-            return response()->json("At least one value must
-            change", 403);
+            return response()->json("At least one value must change", 403);
         } else {
             $user->save();
             return response()->json($user, 200);
