@@ -6,7 +6,7 @@
     class User extends Model{
         protected $table = 'tbluser';
         protected $fillable = [
-            'username','password', 'gender'
+            'userid','username','password', 'gender'
         ];
 
         public $timestamps = false;
