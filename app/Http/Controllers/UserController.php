@@ -91,16 +91,10 @@ Class UserController extends Controller {
     }
 
     public function delete($id) { // DELETE USER
-         //$user =  User::findOrFail($id);
-         $user = User::where('userid', $id)->first();
+         $user =  User::find($id);
+         $user->delete();
 
-         if($user){
-             $user->delete();
-             return $this->successResponse($user);
-         }
-         else{
-             return $this->errorResponse('User ID Does Not Exists', Response::HTTP_NOT_FOUND);
-         }
+         return response()->json('User Successfully Deleted!');
     }
 }
 
