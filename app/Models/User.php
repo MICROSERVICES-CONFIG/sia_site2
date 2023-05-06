@@ -8,6 +8,6 @@
         protected $fillable = ['username','password', 'gender'];
 
         public $timestamps = false;
-        protected $primarykey = 'userid';
+        protected $primaryKey = 'userid';
     }
 
