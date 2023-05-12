@@ -69,6 +69,38 @@ Class UserController extends Controller {
         
     }
 
+    /*public function deleteTeacher($id) {
+        $teachers = Teacher::where('teacherid', $id)->delete();
+
+        if($teachers){
+            return $this->successResponse($teachers);
+        }
+        else{
+            return $this->errorResponse('Teacher ID Does Not Exists', Response::HTTP_NOT_FOUND);
+        }
+    }*/
+
+    /*// UPDATE
+    public function updateTeacher(Request $request, $id)
+    {
+
+        $teachers = Teacher::where('teacherid', $id)->firstOrFail();
+        $rules = [
+            $this->validate($request, [
+            'lastname' => 'required|max:20|alpha',
+            'firstname' => 'required|max:20|alpha',
+            'middlename' => 'required|max:20|alpha',
+            'bday' => 'required|date',
+            'age' => 'required|integer|min:18',
+            ])  
+        ];
+        $this->validate($request, $rules);
+        $teachers->fill($request->all());
+        $teachers->save();
+        
+        return $teachers;
+    } */
+
 }
 
 

@@ -30,3 +30,14 @@ $router->get('/', function () use ($router) {
 $router->get('/users', 'UserController@index'); // get all users records
 $router->post('/users','UserController@add'); // create new user record
 $router->get('/users/{id}','UserController@show'); // get user by id
+
+
+/*$router->post('/add/teachers',['uses' => 'TeacherController@addTeacher']); //1
+
+$router->delete('/delete/teachers/{id}',['uses' => 'TeacherController@deleteTeacher']); //2
+
+$router->put('/update/teachers/{id}',['uses' => 'TeacherController@updateTeacher']); //3
+
+$router->get('/find/teachers/{id}',['uses' => 'TeacherController@showTeacher']); //4
+
+$router->get('/show/teachers',['uses' => 'TeacherController@showALLTEACHERS']); //5*/
