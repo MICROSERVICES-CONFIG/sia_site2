@@ -29,7 +29,7 @@ Class UserController extends Controller {
         //return $this->successResponse($users);
     }
 
-    public function index()
+    public function showALLUSERS()
     {
         $users = User::all();
         
@@ -38,7 +38,7 @@ Class UserController extends Controller {
 
 
 
-    public function add(Request $request)
+    public function addUser(Request $request)
     {
         
         $rules = [
@@ -55,51 +55,79 @@ Class UserController extends Controller {
     }
 
 
-    public function show($id)
+    public function showUser($id)
     {
-        //$user =  User::findOrFail($id);
-        $user = User::where('userid', $id)->first();
+        $user =  User::findOrFail($id);
+
+        return $this->successResponse($user);
+
+        //$user = User::where('userid', $id)->first();
+
+        /*if($user){
+            return $this->successResponse($user);
+        }
+        else{
+            return $this->errorResponse('User ID Does Not Exists', Response::HTTP_NOT_FOUND);
+        }*/
+        
+    }
+
+    public function deleteUser($id) {
+
+        $user =  User::findOrFail($id);
+
+        $user->delete();
+
+        return $this->successResponse('User Deleted!');
+        //return $this->errorResponse('User ID Does Not Exists', Response::HTTP_NOT_FOUND);
+        
+        /*$user = User::where('userid', $id)->delete();
 
         if($user){
             return $this->successResponse($user);
         }
         else{
             return $this->errorResponse('User ID Does Not Exists', Response::HTTP_NOT_FOUND);
-        }
-        
+        }*/
     }
 
-    /*public function deleteTeacher($id) {
-        $teachers = Teacher::where('teacherid', $id)->delete();
-
-        if($teachers){
-            return $this->successResponse($teachers);
-        }
-        else{
-            return $this->errorResponse('Teacher ID Does Not Exists', Response::HTTP_NOT_FOUND);
-        }
-    }*/
-
-    /*// UPDATE
-    public function updateTeacher(Request $request, $id)
+    // UPDATE
+    public function updateUser(Request $request, $id)
     {
 
-        $teachers = Teacher::where('teacherid', $id)->firstOrFail();
+        $rules = [
+                'username' => 'max:20',
+                'password' => 'max:20',
+                'gender' => 'in:Male,Female',
+        ];
+
+        $this->validate($request, $rules);
+        $user = User::where('userid', $id)->firstOrFail();
+
+        $user->fill($request->all());
+
+        if($user->isClean()) {
+            return $this->errorResponse('At least one value must change', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $user->save();
+        return $user;
+
+        /*$user = User::where('userid', $id)->firstOrFail();
         $rules = [
             $this->validate($request, [
-            'lastname' => 'required|max:20|alpha',
-            'firstname' => 'required|max:20|alpha',
-            'middlename' => 'required|max:20|alpha',
-            'bday' => 'required|date',
-            'age' => 'required|integer|min:18',
+                'username' => 'required|max:20',
+                'password' => 'required|max:20',
+                'gender' => 'required|in:Male,Female',
             ])  
         ];
         $this->validate($request, $rules);
-        $teachers->fill($request->all());
-        $teachers->save();
+        $user->fill($request->all());
+        $user->save();
         
-        return $teachers;
-    } */
+        return $this->successResponse($user);*/
+    
+    } 
 
 }
 
